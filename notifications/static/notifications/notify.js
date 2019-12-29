@@ -23,16 +23,43 @@ function fill_notification_list(data) {
         var messages = data.unread_list.map(function (item) {
             var message = "";
             if(typeof item.actor !== 'undefined'){
-                message = item.actor;
+                message += item.actor;
             }
             if(typeof item.verb !== 'undefined'){
-                message = message + " " + item.verb;
+                message += " " + item.verb;
             }
             if(typeof item.target !== 'undefined'){
-                message = message + " " + item.target;
+                message += " " + item.target;
             }
             if(typeof item.timestamp !== 'undefined'){
-                message = message + " " + item.timestamp;
+                message += " " + item.timestamp;
+            }
+            return '<li>' + message + '</li>';
+        }).join('')
+
+        for (var i = 0; i < menus.length; i++){
+            menus[i].innerHTML = messages;
+        }
+    }
+}
+
+function fill_notification_list_with_urls(data) {
+    var menus = document.getElementsByClassName(notify_menu_class);
+    if (menus) {
+        var messages = data.unread_list.map(function (item) {
+            var message = "";
+			
+            if(typeof item.actor !== 'undefined'){
+                message += "<a href='" + item.actor_url + "'>" + item.actor + "</a>";
+            }
+            if(typeof item.verb !== 'undefined'){
+                message += item.verb;
+            }
+            if(typeof item.target !== 'undefined'){
+                message += " <a href='" + item.target_url + "'>" + item.target + "</a>";
+            }
+            if(typeof item.timestamp !== 'undefined'){
+                message += " " + item.timestamp;
             }
             return '<li>' + message + '</li>';
         }).join('')
@@ -57,7 +84,7 @@ function fetch_api_data() {
                     consecutive_misfires = 0;
                     var data = JSON.parse(r.responseText);
                     registered_functions.forEach(function (func) { func(data); });
-                }else{
+                } else {
                     consecutive_misfires++;
                 }
             }
