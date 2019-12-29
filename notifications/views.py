@@ -181,7 +181,7 @@ def live_unread_notification_list(request):
             struct['target_url'] = str(notification.target.get_absolute_url()) if hasattr(notification.target, 'get_absolute_url') \
                                                                                 and callable(notification.target.get_absolute_url) else ''
         if notification.action_object:
-            struct['action_object'] = str(notification.action_object_object)
+            struct['action_object'] = str(notification.action_object)
             struct['action_object_url'] = str(notification.action_object.get_absolute_url()) if hasattr(notification.action_object, 'get_absolute_url') \
                                                                                                 and callable(notification.action_object.get_absolute_url) else ''
         if notification.data:
@@ -235,7 +235,7 @@ def live_all_notification_list(request):
             struct['target_url'] = str(notification.target.get_absolute_url()) if hasattr(notification.target, 'get_absolute_url') \
                                                                                 and callable(notification.target.get_absolute_url) else ''
         if notification.action_object:
-            struct['action_object'] = str(notification.action_object_object)
+            struct['action_object'] = str(notification.action_object)
             struct['action_object_url'] = str(notification.action_object.get_absolute_url()) if hasattr(notification.action_object, 'get_absolute_url') \
                                                                                                 and callable(notification.action_object.get_absolute_url) else ''
         if notification.data:
