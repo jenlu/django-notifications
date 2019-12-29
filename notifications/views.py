@@ -174,10 +174,16 @@ def live_unread_notification_list(request):
         struct['slug'] = id2slug(notification.id)
         if notification.actor:
             struct['actor'] = str(notification.actor)
+            struct['actor_url'] = str(notification.actor.get_absolute_url()) if hasattr(notification.actor, 'get_absolute_url') \
+                                                                                and callable(notification.actor.get_absolute_url) else ''
         if notification.target:
             struct['target'] = str(notification.target)
+            struct['target_url'] = str(notification.target.get_absolute_url()) if hasattr(notification.target, 'get_absolute_url') \
+                                                                                and callable(notification.target.get_absolute_url) else ''
         if notification.action_object:
-            struct['action_object'] = str(notification.action_object)
+            struct['action_object'] = str(notification.action_object_object)
+            struct['action_object_url'] = str(notification.action_object.get_absolute_url()) if hasattr(notification.action_object, 'get_absolute_url') \
+                                                                                                and callable(notification.action_object.get_absolute_url) else ''
         if notification.data:
             struct['data'] = notification.data
         unread_list.append(struct)
@@ -222,10 +228,16 @@ def live_all_notification_list(request):
         struct['slug'] = id2slug(notification.id)
         if notification.actor:
             struct['actor'] = str(notification.actor)
+            struct['actor_url'] = str(notification.actor.get_absolute_url()) if hasattr(notification.actor, 'get_absolute_url') \
+                                                                                and callable(notification.actor.get_absolute_url) else ''
         if notification.target:
             struct['target'] = str(notification.target)
+            struct['target_url'] = str(notification.target.get_absolute_url()) if hasattr(notification.target, 'get_absolute_url') \
+                                                                                and callable(notification.target.get_absolute_url) else ''
         if notification.action_object:
-            struct['action_object'] = str(notification.action_object)
+            struct['action_object'] = str(notification.action_object_object)
+            struct['action_object_url'] = str(notification.action_object.get_absolute_url()) if hasattr(notification.action_object, 'get_absolute_url') \
+                                                                                                and callable(notification.action_object.get_absolute_url) else ''
         if notification.data:
             struct['data'] = notification.data
         all_list.append(struct)
